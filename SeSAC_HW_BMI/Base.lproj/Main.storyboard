@@ -111,6 +111,17 @@
                                     <action selector="randomBMIbuttonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ULx-oD-Dpv"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-0x-ZTS">
+                                <rect key="frame" x="20" y="330" width="153" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-j7-T1Y">
+                                <rect key="frame" x="32" y="301" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -119,14 +130,18 @@
                             <constraint firstItem="goT-0m-4c4" firstAttribute="trailing" secondItem="LbR-8e-Hmg" secondAttribute="trailing" id="0g5-3C-aK7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yTn-iq-NIJ" secondAttribute="trailing" constant="20" id="31L-6f-WsG"/>
                             <constraint firstItem="Frn-Kz-PMJ" firstAttribute="top" secondItem="goT-0m-4c4" secondAttribute="top" id="3b7-Ka-j85"/>
+                            <constraint firstItem="TSd-0x-ZTS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="4WQ-Xl-qiK"/>
                             <constraint firstItem="LbR-8e-Hmg" firstAttribute="top" secondItem="goT-0m-4c4" secondAttribute="bottom" constant="10" id="7O0-gG-fr7"/>
                             <constraint firstAttribute="trailing" secondItem="rNj-lh-Lej" secondAttribute="trailing" id="9eb-kd-Bt3"/>
                             <constraint firstItem="XSN-q0-1YM" firstAttribute="top" secondItem="Dbe-8o-n0U" secondAttribute="bottom" constant="12" id="Af5-6r-n8Q"/>
+                            <constraint firstItem="TSd-0x-ZTS" firstAttribute="top" secondItem="Hc2-j7-T1Y" secondAttribute="bottom" constant="8" id="EiV-cf-6r0"/>
                             <constraint firstItem="Frn-Kz-PMJ" firstAttribute="height" secondItem="goT-0m-4c4" secondAttribute="height" multiplier="1.02941" id="ErW-Gd-n0s"/>
+                            <constraint firstItem="rNj-lh-Lej" firstAttribute="leading" secondItem="TSd-0x-ZTS" secondAttribute="trailing" constant="20" id="Ez4-Hf-kmr"/>
                             <constraint firstItem="3Yq-el-Snr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="FfS-ou-0vN"/>
                             <constraint firstItem="KGR-Un-g9m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="I6V-db-ymX"/>
                             <constraint firstItem="3Yq-el-Snr" firstAttribute="top" secondItem="hmF-hR-02o" secondAttribute="bottom" constant="20" id="Icw-oZ-KZd"/>
                             <constraint firstItem="Dbe-8o-n0U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Lbc-xO-UtZ"/>
+                            <constraint firstItem="Hc2-j7-T1Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="MHs-vx-vns"/>
                             <constraint firstItem="hmF-hR-02o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Nvs-b3-soo"/>
                             <constraint firstItem="hmF-hR-02o" firstAttribute="bottom" secondItem="ziM-2v-O61" secondAttribute="bottom" id="RZa-MJ-ot1"/>
                             <constraint firstItem="yTn-iq-NIJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Rar-oS-9YB"/>
@@ -144,6 +159,7 @@
                             <constraint firstItem="goT-0m-4c4" firstAttribute="top" secondItem="3Yq-el-Snr" secondAttribute="bottom" constant="8" id="pcU-51-Ior"/>
                             <constraint firstItem="rNj-lh-Lej" firstAttribute="top" secondItem="Dbe-8o-n0U" secondAttribute="bottom" id="r8q-Hh-C0i"/>
                             <constraint firstItem="Dbe-8o-n0U" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="rCO-LJ-9Ex"/>
+                            <constraint firstItem="KGR-Un-g9m" firstAttribute="top" secondItem="TSd-0x-ZTS" secondAttribute="bottom" constant="20" id="yDy-Pe-bal"/>
                             <constraint firstItem="goT-0m-4c4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="zmQ-WM-Tl5"/>
                         </constraints>
                         <connections>
@@ -159,6 +175,8 @@
                         <outlet property="hideWeightButton" destination="Frn-Kz-PMJ" id="vyp-fe-VIp"/>
                         <outlet property="info" destination="XSN-q0-1YM" id="Ksi-hf-DTD"/>
                         <outlet property="kg" destination="B8C-fq-2Dh" id="puh-ZA-XRr"/>
+                        <outlet property="nickNameLabel" destination="Hc2-j7-T1Y" id="gaR-62-JyS"/>
+                        <outlet property="nickNameTextField" destination="TSd-0x-ZTS" id="Unk-ti-RRS"/>
                         <outlet property="randomBMI" destination="LbR-8e-Hmg" id="k6v-qx-bP9"/>
                         <outlet property="resultButton" destination="yTn-iq-NIJ" id="mCx-jh-luR"/>
                         <outlet property="weightLabel" destination="3Yq-el-Snr" id="xj9-zB-7oo"/>

@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet var BMICalculator: UILabel!
     @IBOutlet var info: UILabel!
     @IBOutlet var BMIImage: UIImageView!
+    @IBOutlet var nickNameLabel: UILabel!
+    @IBOutlet var nickNameTextField: UITextField!
+    
     @IBOutlet var heightLabel: UILabel!
     @IBOutlet var cm: UILabel!
     @IBOutlet var heightTextField: UITextField!
@@ -22,6 +25,9 @@ class ViewController: UIViewController {
     @IBOutlet var randomBMI: UIButton!
     @IBOutlet var resultButton: UIButton!
     
+//    var nickName = "지은"
+//    var nickName = UserDefaults.standard.string(forKey: "nickName")
+    
     // BMI 결과
     var statement = ""
 
@@ -31,15 +37,25 @@ class ViewController: UIViewController {
         BMICalculator.text = "BMI Calculator"
         BMICalculator.font = .boldSystemFont(ofSize: 30)
         
-        info.text = "당신의 BMI 지수를\n알려드릴게요"
+//        guard let myNickName = UserDefaults.standard.string(forKey: "nickName") else {
+//            print("닉네임 입력 오류")
+//            return
+//        }
+        
+        
+        info.text = "님의 BMI 지수를\n알려드릴게요"
         info.numberOfLines = 2
         
         // trailing safe area -> 이미지 높이를 억지로 늘리니까 trailing에 맞춰지긴 했는데 사이즈를 고정값으로 하지 않고 어떻게 하는지 다시 확인해보기
         BMIImage.image = .image
         
+        nickNameLabel.text = "닉네임"
+        textFieldDesign(nickNameTextField)
+        
         heightLabel.text = "키가 어떻게 되시나요?"
         // textfield의 원래 bordercolor가 희미하게 남아있음
         textFieldDesign(heightTextField)
+//        textField(heightTextField, shouldChangeCharactesIn: , replacementString: <#T##String#>)
         cm.text = "cm"
         
         weightLabel.text = "몸무게는 어떻게 되시나요?"
@@ -69,7 +85,6 @@ class ViewController: UIViewController {
             return
         }
         heightTextField.text = "\(height)"
-
     }
 
     @IBAction func inputWeight(_ sender: UITextField) {
@@ -95,8 +110,8 @@ class ViewController: UIViewController {
     @IBAction func randomBMIbuttonClicked(_ sender: UIButton) {
         
         // 이것도 하나로 합치기
-        var randomHeight = Int.random(in: 65...290)
-        var randomWeight = Int.random(in: 7...200)
+        let randomHeight = Int.random(in: 65...290)
+        let randomWeight = Int.random(in: 7...200)
         
         heightTextField.text = "\(randomHeight)"
         weightTextField.text = "\(randomWeight)"
@@ -150,4 +165,16 @@ class ViewController: UIViewController {
         button.backgroundColor = .purple
         button.layer.cornerRadius = 10
     }
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactesIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == heightTextField {
+//            let allowedCharacters = CharacterSet.decimalDigits
+//            let characterSet = CharacterSet(charactersIn: string)
+//            return allowedCharacters.isSuperset(of: characterSet)
+//        }
+//        return true
+//    }
+    
+    
+    
 }
