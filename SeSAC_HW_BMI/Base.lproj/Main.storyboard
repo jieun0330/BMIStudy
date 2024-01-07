@@ -36,7 +36,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="inputWeight:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="2aV-Yk-Ulb"/>
+                                    <action selector="inputWeight:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="j7B-vP-NGh"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hmF-hR-02o">
@@ -47,7 +47,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="inputHeight:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="2Bx-1V-lUP"/>
+                                    <action selector="inputHeight:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="qqP-T6-Ayt"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbe-8o-n0U">
@@ -115,6 +115,9 @@
                                 <rect key="frame" x="20" y="330" width="153" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="nickNameTextFieldTapped:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="I0b-49-Ter"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-j7-T1Y">
                                 <rect key="frame" x="32" y="301" width="42" height="21"/>
@@ -122,6 +125,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjK-Cx-vOF">
+                                <rect key="frame" x="298" y="663" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="resetButtonClicked:textField:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FEy-8K-T35"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -156,10 +167,12 @@
                             <constraint firstItem="rNj-lh-Lej" firstAttribute="bottom" secondItem="KGR-Un-g9m" secondAttribute="bottom" constant="8" id="kEN-o5-qnP"/>
                             <constraint firstItem="B8C-fq-2Dh" firstAttribute="leading" secondItem="Frn-Kz-PMJ" secondAttribute="trailing" id="lDN-UU-FTe"/>
                             <constraint firstItem="ziM-2v-O61" firstAttribute="leading" secondItem="hmF-hR-02o" secondAttribute="trailing" constant="4" id="lKx-gq-eGn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zjK-Cx-vOF" secondAttribute="trailing" constant="20" id="leF-Kz-3jL"/>
                             <constraint firstItem="goT-0m-4c4" firstAttribute="top" secondItem="3Yq-el-Snr" secondAttribute="bottom" constant="8" id="pcU-51-Ior"/>
                             <constraint firstItem="rNj-lh-Lej" firstAttribute="top" secondItem="Dbe-8o-n0U" secondAttribute="bottom" id="r8q-Hh-C0i"/>
                             <constraint firstItem="Dbe-8o-n0U" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="rCO-LJ-9Ex"/>
                             <constraint firstItem="KGR-Un-g9m" firstAttribute="top" secondItem="TSd-0x-ZTS" secondAttribute="bottom" constant="20" id="yDy-Pe-bal"/>
+                            <constraint firstItem="zjK-Cx-vOF" firstAttribute="top" secondItem="yTn-iq-NIJ" secondAttribute="bottom" constant="8" id="ylZ-K5-CZe"/>
                             <constraint firstItem="goT-0m-4c4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="zmQ-WM-Tl5"/>
                         </constraints>
                         <connections>
@@ -178,6 +191,7 @@
                         <outlet property="nickNameLabel" destination="Hc2-j7-T1Y" id="gaR-62-JyS"/>
                         <outlet property="nickNameTextField" destination="TSd-0x-ZTS" id="Unk-ti-RRS"/>
                         <outlet property="randomBMI" destination="LbR-8e-Hmg" id="k6v-qx-bP9"/>
+                        <outlet property="resetButton" destination="zjK-Cx-vOF" id="m8w-gZ-qJC"/>
                         <outlet property="resultButton" destination="yTn-iq-NIJ" id="mCx-jh-luR"/>
                         <outlet property="weightLabel" destination="3Yq-el-Snr" id="xj9-zB-7oo"/>
                         <outlet property="weightTextField" destination="goT-0m-4c4" id="tPk-6x-GTc"/>
