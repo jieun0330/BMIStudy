@@ -88,9 +88,6 @@
                                 <rect key="frame" x="307.66666666666669" y="505.99999999999994" width="24" height="45.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title=""/>
-                                <connections>
-                                    <action selector="hideWeightButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R2L-ZV-BFb"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTn-iq-NIJ">
                                 <rect key="frame" x="20" y="615" width="353" height="40"/>

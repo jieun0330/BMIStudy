@@ -13,6 +13,7 @@
 		C20A3C7A2B45577C0038A695 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C20A3C782B45577C0038A695 /* Main.storyboard */; };
 		C20A3C7C2B45577E0038A695 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C20A3C7B2B45577E0038A695 /* Assets.xcassets */; };
 		C20A3C7F2B45577E0038A695 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C20A3C7D2B45577E0038A695 /* LaunchScreen.storyboard */; };
+		C2A2E0D72B6F0AD300957186 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2E0D62B6F0AD300957186 /* UserDefaultManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C20A3C7B2B45577E0038A695 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C20A3C7E2B45577E0038A695 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C20A3C802B45577E0038A695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2A2E0D62B6F0AD300957186 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				C20A3C7B2B45577E0038A695 /* Assets.xcassets */,
 				C20A3C7D2B45577E0038A695 /* LaunchScreen.storyboard */,
 				C20A3C802B45577E0038A695 /* Info.plist */,
+				C2A2E0D62B6F0AD300957186 /* UserDefaultManager.swift */,
 			);
 			path = SeSAC_HW_BMI;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				C20A3C772B45577C0038A695 /* ViewController.swift in Sources */,
 				C20A3C732B45577C0038A695 /* AppDelegate.swift in Sources */,
+				C2A2E0D72B6F0AD300957186 /* UserDefaultManager.swift in Sources */,
 				C20A3C752B45577C0038A695 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
