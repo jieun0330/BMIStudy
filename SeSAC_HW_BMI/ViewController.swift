@@ -24,9 +24,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var randomBMI: UIButton!
     @IBOutlet var resultButton: UIButton!
     @IBOutlet var resetButton: UIButton!
+    
     // BMI 결과 case
     var statement = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +38,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         hideWeightButton.addTarget(self, action: #selector(hideWeightButtonClicked), for: .touchUpInside)
         randomButtonDesign(randomBMI, text: "랜덤으로 BMI 계산하기")
         randomButtonDesign(resetButton, text: "RESET")
-        resultButton(resultButton)
+        resultButtonDesign(resultButton)
     }
     
     // 상단 타이틀 영역
@@ -62,6 +63,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textFieldDesign(heightTextField)
         cm.text = "cm"
         heightTextField.text = "\(UserDefaultManager.shared.height)"
+        print(UserDefaultManager.shared.height)
     }
     
     // 몸무게 영역
@@ -79,7 +81,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         weightTextField.isSecureTextEntry.toggle()
         sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-
+        
         if weightTextField.isSecureTextEntry == false {
             hideWeightButton.setImage(UIImage(systemName: "eye"), for: .normal)
         }
@@ -95,28 +97,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // 닉네임 입력
     @IBAction func inputNickname(_ sender: UITextField, label: UILabel) {
         
-        UserDefaultManager.shared.nickname = sender.text!
+        let whiteSpace = sender.text
+        guard let trimString = whiteSpace?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         
-        if sender.text!.count < 14 {
+        UserDefaultManager.shared.nickname = trimString
+        
+        if trimString.count < 14 {
             info.text = "\(UserDefaultManager.shared.nickname)님의 BMI 지수를\n알려드릴게요"
             nickNameLabel.text = "닉네임을 입력하세요"
             nickNameLabel.textColor = .black
+            sender.text = trimString
         } else {
             nickNameLabel.text = "14자 이하로 입력하세요"
             nickNameLabel.textColor = .red
-            sender.text = ""
+            sender.text = trimString
         }
+        
     }
     
     // 키 입력
     @IBAction func inputHeight(_ sender: UITextField, label: UILabel) {
-                
+        
         // 숫자가 아닐 경우
         guard let height = Double(sender.text!) else {
             invalidText(heightLabel, textField: sender)
             return
         }
-
+        
         // 유효한 숫자가 아닐 경우
         if height < 65 || height > 290 {
             invalidText(heightLabel, textField: sender)
@@ -125,6 +132,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // 정상 입력했을 경우
         validText(heightLabel, text: "키가 어떻게 되시나요?")
         UserDefaultManager.shared.height = height
+        
     }
     
     // 몸무게 입력
@@ -163,7 +171,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // BMI 결과
     @IBAction func resultButtonClicked(_ sender: UIButton) {
-
+        
         guard let height = heightTextField.text else { return }
         
         guard let weight = weightTextField.text else { return }
@@ -184,69 +192,65 @@ class ViewController: UIViewController, UITextFieldDelegate {
         default: statement = "다이어트 하자,,"
         }
         
-        let alert = UIAlertController(title: "\(statement)", message: "BMI 지수: \(bmiResult)", preferredStyle: .alert)
+        let resultAlert = UIAlertController(title: "\(statement)", message: "BMI 지수: \(bmiResult)", preferredStyle: .alert)
         let exitButton = UIAlertAction(title: "닫기", style: .default)
-        alert.addAction(exitButton)
+        resultAlert.addAction(exitButton)
         
-        if heightTextField.text?.isEmpty == true || weightTextField.text?.isEmpty == true  {
-            
+        let emptyAlert = UIAlertController(title: "정보를 입력해주세요", message: "", preferredStyle: .alert)
+        let closeButton = UIAlertAction(title: "닫기", style: .default)
+        emptyAlert.addAction(closeButton)
+        
+        if heightTextField.text?.isEmpty == true || weightTextField.text?.isEmpty == true || heightTextField.text == "0.0" || weightTextField.text == "0.0" || nickNameTextField.text?.isEmpty == true {
+            present(emptyAlert, animated: true)
         } else {
-            present(alert, animated: true)
+            present(resultAlert, animated: true)
         }
     }
     
-    //Mark: - 리셋 버튼
+    // 리셋 버튼
     @IBAction func resetButtonClicked(_ sender: UIButton, textField: UITextField) {
         reset()
     }
     
+    // Bool, Int, Float, Double 타입의 값들은 해당 키가 없으면 기본값을 반환해준다
+    // Bool -> false
+    // Int, Float, Doulbe -> 0
     func reset() {
-        nickNameTextField.text = ""
-        heightTextField.text = ""
-        weightTextField.text = ""
+        nickNameTextField.text?.removeAll()
+        heightTextField.text?.removeAll()
+        weightTextField.text?.removeAll()
         
         if heightLabel.text == "다시 입력해주세요" || weightLabel.text == "다시 입력해주세요" {
             validText(heightLabel, text: "키가 어떻게 되시나요?")
             validText(weightLabel, text: "몸무게는 어떻게 되시나요?")
         }
         
-        UserDefaults.standard.setValue("", forKey: "nickName")
-        UserDefaults.standard.setValue("", forKey: "height")
-        UserDefaults.standard.setValue("", forKey: "weight")
+        // ❓ 리셋 누른 후 앱 껐다 켰을 때는 0.0으로 세팅됨 -> 어떻게 할 방법 없나
+        UserDefaultManager.shared.nickname.removeAll()
+        UserDefaults.standard.removeObject(forKey: "height")
+        UserDefaults.standard.removeObject(forKey: "weight")
     }
     
-    
-    //Mark: - 빈 화면 눌렀을 때 키보드 내리게 하기
     @IBAction func keyboardDismiss(_ sender: Any) {
         view.endEditing(true)
     }
 
 
-    //Mark: - 결과 버튼 디자인 요소
-    func resultButton(_ button: UIButton) {
+    // 결과 버튼 디자인 요소
+    func resultButtonDesign(_ button: UIButton) {
         button.setTitle("결과 확인", for: .normal)
         button.tintColor = .white
-//        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .purple
         button.layer.cornerRadius = 10
     }
-    
-    //Mark: - 결과 값 저장
-//    func saveValue() {
-        
 
-//        nickNameTextField.text = UserDefaultManager.shared.nickname
-//heightTextField.text = UserDefaults.standard.string(forKey: "height")
-//weightTextField.text = UserDefaults.standard.string(forKey: "weight")
-//    }
-    
-    //Mark: - 입력 값이 유효할 때
+    // 입력 값이 유효할 때
     func validText(_ label: UILabel, text: String) {
         label.text = text
         label.textColor = .black
     }
     
-    //Mark: - 입력 값이 유효하지 않을 때
+    // 입력 값이 유효하지 않을 때
     func invalidText(_ sender: UILabel, textField: UITextField) {
         sender.text = "다시 입력해주세요"
         sender.textColor = .red

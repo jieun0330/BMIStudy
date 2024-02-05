@@ -21,12 +21,14 @@ class UserDefaultManager {
     
     var nickname: String {
         get {
-            userDefault.string(forKey: UDKey.nickname.rawValue) ?? "___"
+            userDefault.string(forKey: UDKey.nickname.rawValue) ?? ""
         }
         set {
             userDefault.set(newValue, forKey: UDKey.nickname.rawValue)
         }
     }
+    
+    // ❓ String은 nil값이 있을 수 있어서 ??을 붙이고 Int, Double은 안붙인다 ? -> 덴님한테 다시 여쭤보기 
     
     var height: Double {
         get {
