@@ -28,7 +28,7 @@ class UserDefaultManager {
         }
     }
     
-    // ❓ String은 nil값이 있을 수 있어서 ??을 붙이고 Int, Double은 안붙인다 ? -> 덴님한테 다시 여쭤보기 
+    // ❓ String은 nil값이 있을 수 있어서 ??을 붙이고, Int, Double은 기본값 0을 가지고있다!?
     
     var height: Double {
         get {
@@ -47,5 +47,4 @@ class UserDefaultManager {
             userDefault.set(newValue, forKey: UDKey.weight.rawValue)
         }
     }
-    
 }

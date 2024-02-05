@@ -63,7 +63,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textFieldDesign(heightTextField)
         cm.text = "cm"
         heightTextField.text = "\(UserDefaultManager.shared.height)"
-        print(UserDefaultManager.shared.height)
     }
     
     // 몸무게 영역
@@ -83,7 +82,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         
         if weightTextField.isSecureTextEntry == false {
-            hideWeightButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            sender.setImage(UIImage(systemName: "eye"), for: .normal)
         }
     }
     
@@ -95,7 +94,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 닉네임 입력
-    @IBAction func inputNickname(_ sender: UITextField, label: UILabel) {
+    @IBAction func inputNickname(_ sender: UITextField) {
         
         let whiteSpace = sender.text
         guard let trimString = whiteSpace?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
@@ -112,11 +111,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             nickNameLabel.textColor = .red
             sender.text = trimString
         }
-        
     }
     
     // 키 입력
-    @IBAction func inputHeight(_ sender: UITextField, label: UILabel) {
+    @IBAction func inputHeight(_ sender: UITextField) {
         
         // 숫자가 아닐 경우
         guard let height = Double(sender.text!) else {
@@ -136,21 +134,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 몸무게 입력
-    @IBAction func inputWeight(_ sender: UITextField, label: UILabel) {
+    @IBAction func inputWeight(_ sender: UITextField) {
         
         // 숫자가 아닐 경우
         guard let weight = Double(sender.text!) else {
-            invalidText(label, textField: sender)
+            invalidText(weightLabel, textField: sender)
             return
         }
         
         // 유효한 숫자가 아닐 경우
         if weight < 7 || weight > 200 {
-            invalidText(label, textField: sender)
+            invalidText(weightLabel, textField: sender)
         }
         
         // 정상 입력했을 경우
-        validText(label, text: "몸무게는 어떻게 되시나요?")
+        validText(weightLabel, text: "몸무게는 어떻게 되시나요?")
         UserDefaultManager.shared.weight = weight
     }
     
@@ -173,7 +171,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func resultButtonClicked(_ sender: UIButton) {
         
         guard let height = heightTextField.text else { return }
-        
         guard let weight = weightTextField.text else { return }
         
         let doubleHeight = (Double(height) ?? 0) / 100
@@ -208,7 +205,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 리셋 버튼
-    @IBAction func resetButtonClicked(_ sender: UIButton, textField: UITextField) {
+    @IBAction func resetButtonClicked(_ sender: UIButton) {
         reset()
     }
     
@@ -225,7 +222,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             validText(weightLabel, text: "몸무게는 어떻게 되시나요?")
         }
         
-        // ❓ 리셋 누른 후 앱 껐다 켰을 때는 0.0으로 세팅됨 -> 어떻게 할 방법 없나
+        // ❓ 리셋 누른 후 앱 껐다 켰을 때는 0.0으로 세팅됨
         UserDefaultManager.shared.nickname.removeAll()
         UserDefaults.standard.removeObject(forKey: "height")
         UserDefaults.standard.removeObject(forKey: "weight")
@@ -234,8 +231,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func keyboardDismiss(_ sender: Any) {
         view.endEditing(true)
     }
-
-
+    
     // 결과 버튼 디자인 요소
     func resultButtonDesign(_ button: UIButton) {
         button.setTitle("결과 확인", for: .normal)
@@ -243,7 +239,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         button.backgroundColor = .purple
         button.layer.cornerRadius = 10
     }
-
+    
     // 입력 값이 유효할 때
     func validText(_ label: UILabel, text: String) {
         label.text = text
