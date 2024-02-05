@@ -32,6 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // ???: textfield의 원래 bordercolor가 희미하게 남아있음
         titleView()
+
         nicknameView()
         heightView()
         weightView()
@@ -48,23 +49,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func titleView() {
         BMICalculator.text = "BMI Calculator"
         BMICalculator.font = .boldSystemFont(ofSize: 30)
-        info.text = "______님의 BMI 지수를\n알려드릴게요"
+        info.text = "\(UserDefaultManager.shared.nickname)님의 BMI 지수를\n알려드릴게요"
         info.numberOfLines = 2
         BMIImage.image = .image
     }
     
     func nicknameView() {
-        textFieldDesign(nickNameTextField, title: "닉네임을 입력하세요")
+        nickNameLabel.text = "닉네임을 입력하세요"
+        textFieldDesign(nickNameTextField)
     }
     
     func heightView() {
-        textFieldDesign(heightTextField, title: "키가 어떻게 되시나요?")
+        heightLabel.text = "키가 어떻게 되시나요?"
+        textFieldDesign(heightTextField)
         cm.text = "cm"
 //        heightTextField.delegate = self
     }
     
     func weightView() {
-        textFieldDesign(weightTextField, title: "몸무게는 어떻게 되시나요?")
+        weightLabel.text = "몸무게는 어떻게 되시나요?"
+        textFieldDesign(weightTextField)
         kg.text = "kg"
 //        weightTextField.delegate = self
         hideWeightButton.setImage(UIImage(systemName: "eye"), for: .normal)
@@ -81,24 +85,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldDesign(_ sender: UITextField, title: String) {
-        sender.text = title
+    func textFieldDesign(_ sender: UITextField) {
         sender.layer.borderColor = UIColor.black.cgColor
         sender.layer.borderWidth = 1
         sender.layer.cornerRadius = 15
     }
 
-    @IBAction func nickNameTextFieldTapped(_ sender: UITextField, label: UILabel) {
+    @IBAction func inputNickname(_ sender: UITextField, label: UILabel) {
+//        sender.text = UserDefaultManager.shared.nickname
+//        print(sender.text)
+        UserDefaultManager.shared.nickname = sender.text!
+
+
         if sender.text!.count < 14 {
-            info.text = "\(sender.text!)님의 BMI 지수를\n알려드릴게요"
-            label.text = "닉네임을 입력하세요"
-            label.textColor = .black
+//            sender.text = UserDefaultManager.shared.nickname
+            info.text = "\(UserDefaultManager.shared.nickname)님의 BMI 지수를\n알려드릴게요" // 여긴 맞아
+            nickNameLabel.text = "닉네임을 입력하세요"
+            nickNameLabel.textColor = .black
+//            UserDefaultManager.shared.nickname
         } else {
-            label.text = "14자 이하로 입력하세요"
-            label.textColor = .red
+            nickNameLabel.text = "14자 이하로 입력하세요"
+            nickNameLabel.textColor = .red
             sender.text = ""
         }
-        UserDefaults.standard.set(sender.text, forKey: "nickName")
+//        sender.text 
+//        print(sender.text)
+//        UserDefaults.standard.set(sender.text, forKey: "nickName")
+//        print(UserDefaultManager.shared.nickname)
+        
+
+//        print(sender.text)
+//        print(UserDefaults.standard.string(forKey: "nickName"))
+        
+//        nickNameTextField.text = UserDefaults.standard.string(forKey: "nickName")
+
     }
     
     //Mark: - 키 입력 텍스트필드
@@ -171,6 +191,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //Mark: - BMI 결과 버튼
     @IBAction func resultButtonClicked(_ sender: UIButton) {
+        
+
+
         
         guard let height = heightTextField.text else {
             print("오류")
@@ -245,10 +268,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //Mark: - 결과 값 저장
     func saveValue() {
-        nickNameTextField.text = UserDefaults.standard.string(forKey: "nickName")
         
-        heightTextField.text = UserDefaults.standard.string(forKey: "height")
-        weightTextField.text = UserDefaults.standard.string(forKey: "weight")
+//        nickNameTextField.text = UserDefaults.standard.string(forKey: "nickName")
+//        print(nickNameTextField.text)
+//        print(UserDefaults.standard.string(forKey: "nickName"))
+        nickNameTextField.text = UserDefaultManager.shared.nickname
+heightTextField.text = UserDefaults.standard.string(forKey: "height")
+weightTextField.text = UserDefaults.standard.string(forKey: "weight")
     }
     
     //Mark: - 입력 값이 유효할 때

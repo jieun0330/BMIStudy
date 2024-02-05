@@ -113,7 +113,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="nickNameTextFieldTapped:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="I0b-49-Ter"/>
+                                    <action selector="inputNickname:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="I0b-49-Ter"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-j7-T1Y">

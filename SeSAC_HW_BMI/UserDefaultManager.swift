@@ -21,7 +21,7 @@ class UserDefaultManager {
     
     var nickname: String {
         get {
-            userDefault.string(forKey: UDKey.nickname.rawValue) ?? "지은"
+            userDefault.string(forKey: UDKey.nickname.rawValue) ?? "___"
         }
         set {
             userDefault.set(newValue, forKey: UDKey.nickname.rawValue)
