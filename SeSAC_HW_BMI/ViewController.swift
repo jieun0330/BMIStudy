@@ -30,22 +30,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // ???: textfield의 원래 bordercolor가 희미하게 남아있음
         titleView()
-        
         nicknameView()
         heightView()
         weightView()
         hideWeightButton.addTarget(self, action: #selector(hideWeightButtonClicked), for: .touchUpInside)
-        
-        randomResetButton(randomBMI, text: "랜덤으로 BMI 계산하기")
-        randomResetButton(resetButton, text: "RESET")
-        
+        randomButtonDesign(randomBMI, text: "랜덤으로 BMI 계산하기")
+        randomButtonDesign(resetButton, text: "RESET")
         resultButton(resultButton)
-        
-//        saveValue()
     }
     
+    // 상단 타이틀 영역
     func titleView() {
         BMICalculator.text = "BMI Calculator"
         BMICalculator.font = .boldSystemFont(ofSize: 30)
@@ -67,10 +62,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textFieldDesign(heightTextField)
         cm.text = "cm"
         heightTextField.text = "\(UserDefaultManager.shared.height)"
-//        heightTextField.text = UserDefaultManager.shared.height
-//        heightTextField.text = UserDefaults.standard.string(forKey: "height")
-
-        //        heightTextField.delegate = self
     }
     
     // 몸무게 영역
@@ -78,18 +69,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         weightLabel.text = "몸무게는 어떻게 되시나요?"
         textFieldDesign(weightTextField)
         kg.text = "kg"
-        //        weightTextField.delegate = self
         hideWeightButton.setImage(UIImage(systemName: "eye"), for: .normal)
         hideWeightButton.tintColor = .gray
         weightTextField.text = "\(UserDefaultManager.shared.weight)"
-
     }
     
+    // 몸무게 가리기 버튼
     @objc func hideWeightButtonClicked(_ sender: UIButton) {
         
         weightTextField.isSecureTextEntry.toggle()
         sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-        
+
         if weightTextField.isSecureTextEntry == false {
             hideWeightButton.setImage(UIImage(systemName: "eye"), for: .normal)
         }
@@ -100,41 +90,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         sender.layer.borderWidth = 1
         sender.layer.cornerRadius = 15
         sender.clipsToBounds = true // 이걸 줘야 남아있는 희미한 borderColor가 없어짐
-//        sender.backgroundColor = .white
     }
     
+    // 닉네임 입력
     @IBAction func inputNickname(_ sender: UITextField, label: UILabel) {
-        //        sender.text = UserDefaultManager.shared.nickname
-        //        print(sender.text)
+        
         UserDefaultManager.shared.nickname = sender.text!
         
-        
         if sender.text!.count < 14 {
-            //            sender.text = UserDefaultManager.shared.nickname
-            info.text = "\(UserDefaultManager.shared.nickname)님의 BMI 지수를\n알려드릴게요" // 여긴 맞아
+            info.text = "\(UserDefaultManager.shared.nickname)님의 BMI 지수를\n알려드릴게요"
             nickNameLabel.text = "닉네임을 입력하세요"
             nickNameLabel.textColor = .black
-            //            UserDefaultManager.shared.nickname
         } else {
             nickNameLabel.text = "14자 이하로 입력하세요"
             nickNameLabel.textColor = .red
             sender.text = ""
         }
-        //        sender.text
-        //        print(sender.text)
-        //        UserDefaults.standard.set(sender.text, forKey: "nickName")
-        //        print(UserDefaultManager.shared.nickname)
-        
-        
-        //        print(sender.text)
-        //        print(UserDefaults.standard.string(forKey: "nickName"))
-        
-        //        nickNameTextField.text = UserDefaults.standard.string(forKey: "nickName")
-        
     }
     
-    //Mark: - 키 입력 텍스트필드
-    // 복붙 막기 기능
+    // 키 입력
     @IBAction func inputHeight(_ sender: UITextField, label: UILabel) {
                 
         // 숫자가 아닐 경우
@@ -151,7 +125,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // 정상 입력했을 경우
         validText(heightLabel, text: "키가 어떻게 되시나요?")
         UserDefaultManager.shared.height = height
-//        UserDefaults.standard.set(sender.text, forKey: "height")
     }
     
     // 몸무게 입력
@@ -162,7 +135,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             invalidText(label, textField: sender)
             return
         }
-//        sender.text = "\(weight)"
         
         // 유효한 숫자가 아닐 경우
         if weight < 7 || weight > 200 {
@@ -172,26 +144,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // 정상 입력했을 경우
         validText(label, text: "몸무게는 어떻게 되시나요?")
         UserDefaultManager.shared.weight = weight
-//        UserDefaults.standard.set(sender.text, forKey: "weight")
-        
     }
     
-    //Mark: - TextField 숫자만 입력되게
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let allow = CharacterSet(charactersIn: "0123456789")
-//        let stringSet = CharacterSet(charactersIn: string)
-//        return allow.isSuperset(of: stringSet)
-//    }
-
-    //Mark: - 몸무게 안보이게 하는 버튼
-    // 다시 클릭했을 때 아이콘 돌아가기 기능 구현
-//    @IBAction func hideWeightButtonClicked(_ sender: UIButton) {
-//        weightTextField.isSecureTextEntry.toggle()
-//        sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-//    }
-    
-    //Mark: - 랜덤 BMI
-    @IBAction func randomBMIbuttonClicked(_ sender: UIButton) {
+    // 랜덤 BMI
+    @IBAction func randomButtonClicked(_ sender: UIButton) {
         
         let randomHeight = Int.random(in: 65...290)
         let randomWeight = Int.random(in: 7...200)
@@ -200,32 +156,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         weightTextField.text = "\(randomWeight)"
     }
     
-    // 눌린 상태에서는 왜 파란색으로 변할까
-    func randomResetButton(_ button: UIButton, text: String) {
+    func randomButtonDesign(_ button: UIButton, text: String) {
         button.setTitle(text, for: .normal)
-        button.setTitleColor(.red, for: .normal)
+        button.tintColor = .red
     }
     
-    //Mark: - BMI 결과 버튼
+    // BMI 결과
     @IBAction func resultButtonClicked(_ sender: UIButton) {
-        
 
-
+        guard let height = heightTextField.text else { return }
         
-        guard let height = heightTextField.text else {
-            print("오류")
-            return
-        }
-        
-        guard let weight = weightTextField.text else {
-            print("오류")
-            return
-        }
+        guard let weight = weightTextField.text else { return }
         
         let doubleHeight = (Double(height) ?? 0) / 100
         let twoTimesHeight = doubleHeight * doubleHeight
         let doubleWeight = (Double(weight) ?? 0)
         let bmiNum = doubleWeight / twoTimesHeight
+        // %.2f 소수점 둘째까지 출력
         let bmiResult = String(format: "%.2f", bmiNum)
         
         switch bmiNum {
@@ -278,7 +225,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //Mark: - 결과 버튼 디자인 요소
     func resultButton(_ button: UIButton) {
         button.setTitle("결과 확인", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.tintColor = .white
+//        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .purple
         button.layer.cornerRadius = 10
     }
