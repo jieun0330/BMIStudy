@@ -35,9 +35,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="inputWeight:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="j7B-vP-NGh"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hmF-hR-02o">
                                 <rect key="frame" x="20" y="413" width="307" height="44"/>
@@ -46,9 +43,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="inputHeight:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="qqP-T6-Ayt"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbe-8o-n0U">
                                 <rect key="frame" x="20" y="79" width="42" height="22"/>
@@ -113,7 +107,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="inputNickname:label:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="I0b-49-Ter"/>
+                                    <action selector="inputNickname:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="VAT-Mf-6wB"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-j7-T1Y">
@@ -126,9 +120,6 @@
                                 <rect key="frame" x="298" y="663" width="75" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="resetButtonClicked:textField:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FEy-8K-T35"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

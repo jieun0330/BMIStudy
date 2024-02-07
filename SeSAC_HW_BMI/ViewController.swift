@@ -167,20 +167,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         button.tintColor = .red
     }
     
-    // BMI 결과
-    @IBAction func resultButtonClicked(_ sender: UIButton) {
-        
-        guard let height = heightTextField.text else { return }
-        guard let weight = weightTextField.text else { return }
-        
-        let doubleHeight = (Double(height) ?? 0) / 100
-        let twoTimesHeight = doubleHeight * doubleHeight
-        let doubleWeight = (Double(weight) ?? 0)
-        let bmiNum = doubleWeight / twoTimesHeight
-        // %.2f 소수점 둘째까지 출력
-        let bmiResult = String(format: "%.2f", bmiNum)
-        
-        switch bmiNum {
+//    func example(_ bmi: Double) -> String {
+//        
+//    }
+    
+    func bmiStatement(_ bmi: Double) -> String {
+        switch bmi {
         case 0..<18.5: statement = "저체중"
         case 18.5..<23: statement = "정상"
         case 23..<25: statement = "위험체중"
@@ -189,7 +181,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
         default: statement = "다이어트 하자,,"
         }
         
-        let resultAlert = UIAlertController(title: "\(statement)", message: "BMI 지수: \(bmiResult)", preferredStyle: .alert)
+        return statement
+    }
+    
+    func calculateBMI(weight: String, height: String) -> Double {
+        
+        let doubleHeight = (Double(height) ?? 0) / 100
+        let twoTimesHeight = doubleHeight * doubleHeight
+        let doubleWeight = (Double(weight) ?? 0)
+
+        return doubleWeight / twoTimesHeight
+    }
+    
+    // BMI 결과
+    @IBAction func resultButtonClicked(_ sender: UIButton) {
+        
+        guard let weight = weightTextField.text else { return }
+        guard let height = heightTextField.text else { return }
+        
+        let bmiNum = calculateBMI(weight: weight, height: height)
+        // %.2f 소수점 둘째까지 출력
+        let bmiResult = String(format: "%.2f", bmiNum)
+        
+        // Alert
+        let resultAlert = UIAlertController(title: "\(bmiStatement(bmiNum))", message: "BMI 지수: \(bmiResult)", preferredStyle: .alert)
         let exitButton = UIAlertAction(title: "닫기", style: .default)
         resultAlert.addAction(exitButton)
         
