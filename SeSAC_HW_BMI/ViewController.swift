@@ -130,7 +130,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // 정상 입력했을 경우
         validText(heightLabel, text: "키가 어떻게 되시나요?")
         UserDefaultManager.shared.height = height
-        
     }
     
     // 몸무게 입력
@@ -167,9 +166,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         button.tintColor = .red
     }
     
-//    func example(_ bmi: Double) -> String {
-//        
-//    }
+    //    func example(_ bmi: Double) -> String {
+    //        
+    //    }
     
     func bmiStatement(_ bmi: Double) -> String {
         switch bmi {
@@ -189,7 +188,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let doubleHeight = (Double(height) ?? 0) / 100
         let twoTimesHeight = doubleHeight * doubleHeight
         let doubleWeight = (Double(weight) ?? 0)
-
+        
         return doubleWeight / twoTimesHeight
     }
     
@@ -198,6 +197,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         guard let weight = weightTextField.text else { return }
         guard let height = heightTextField.text else { return }
+        //        guard let weight = weightTextField.text, let height = heightTextField.text else { return }
+        // 이렇게 쓰는것도 가능하네 ?
         
         let bmiNum = calculateBMI(weight: weight, height: height)
         // %.2f 소수점 둘째까지 출력
